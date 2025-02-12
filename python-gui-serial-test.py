@@ -58,7 +58,7 @@ def run_loop():
         # serial things
         if connected:
             line = mega.readline().decode('utf-8').rstrip() # receive status information from arduino
-            if line[0:5] == "@iSp_":
+            if line[0:4] == "@iSp":
                 lbl_input.config(text="Latest input: " + line)
 #                 updateCSV(line)
             print(line)
