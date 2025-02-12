@@ -16,15 +16,18 @@ shortdate = ""
 # list com ports and connect
 def serial_connect():
     global connected, mega, comdev
+    found = False
     ports = serial.tools.list_ports.comports()
     for port in ports:
         print(f"Device: {port.device}, Description: {port.description}, HWID: {port.hwid}")
-        if "Arduino" in port.description:
+#         if "Arduino" in port.description:
+        if not found:
             comdev = port.device
             mega = serial.Serial(comdev, 9600)
             mega.reset_input_buffer()
             lbl_serial.config(text="Serial Status: Connected to " + comdev)
             connected = True
+            found = True
             break
 
 # Function to update the CSV file
